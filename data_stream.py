@@ -28,8 +28,16 @@ def run_spark_job(spark):
     # TODO Create Spark Configuration
     # Create Spark configurations with max offset of 200 per trigger
     # set up correct bootstrap server and port
+    # solution_trigger_variation.py
     df = spark \
         .readStream \
+        .format("kafka") \
+        .option("kafka.bootstrap.servers", "localhost:9092") \
+        .option("subscribe", "crime_info") \
+        .option("startingOffsets", "earliest") \
+        .option("maxOffsetsPerTrigger", 200) \
+        .option("stopGracefullyOnShutdown", "true") \
+        .load()
 
     # Show schema for the incoming resources for checks
     df.printSchema()
