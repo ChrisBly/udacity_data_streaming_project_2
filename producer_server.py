@@ -11,10 +11,13 @@ class ProducerServer(KafkaProducer):
         self.topic = topic
 
     #TODO we're generating a dummy data
+    # incorrect format. data_stream.py failing.
+    # https://knowledge.udacity.com/questions/63367
     def generate_data(self):
         with open(self.input_file) as f:
-            for line in f:
-                message = self.dict_to_binary(line)
+            json_data = json.load(f)
+            for row  in json_data:
+                message = self.dict_to_binary(row)
                 # TODO send the correct data
                 # kafka_producer_server.py
                 self.send(self.topic, message)
