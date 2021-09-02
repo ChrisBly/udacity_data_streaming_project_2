@@ -8,7 +8,7 @@ def run_kafka_server():
     # TODO fill in blanks
     producer = producer_server.ProducerServer(
         input_file=input_file,
-        topic="police_department_calls",
+        topic="police_department_calls_3",
         bootstrap_servers="localhost:9092",
         client_id="CLIENT_ID"
     )
